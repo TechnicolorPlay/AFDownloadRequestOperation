@@ -32,7 +32,7 @@
 
 @interface AFURLConnectionOperation (AFInternal)
 @property (nonatomic, strong) NSURLRequest *request;
-@property (readonly, nonatomic, assign) long long totalBytesRead;
+@property (readonly, nonatomic) long long totalBytesRead;
 @end
 
 typedef void (^AFURLConnectionProgressiveOperationProgressBlock)(AFDownloadRequestOperation *operation, NSInteger bytes, long long totalBytes, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile);
@@ -167,7 +167,7 @@ typedef void (^AFURLConnectionProgressiveOperationProgressBlock)(AFDownloadReque
 #pragma mark - Private
 
 - (unsigned long long)fileSizeForPath:(NSString *)path {
-    signed long long fileSize = 0;
+    unsigned long long fileSize = 0;
     NSFileManager *fileManager = [NSFileManager new]; // default is not thread safe
     if ([fileManager fileExistsAtPath:path]) {
         NSError *error = nil;
@@ -287,7 +287,7 @@ typedef void (^AFURLConnectionProgressiveOperationProgressBlock)(AFDownloadReque
 
     if (self.progressiveDownloadProgress) {
         dispatch_async(self.progressiveDownloadCallbackQueue ?: dispatch_get_main_queue(), ^{
-            self.progressiveDownloadProgress(self,(long long)[data length], self.totalBytesRead, self.response.expectedContentLength,self.totalBytesReadPerDownload + self.offsetContentLength, self.totalContentLength);
+            self.progressiveDownloadProgress(self, (NSInteger)[data length], self.totalBytesRead, self.response.expectedContentLength,self.totalBytesReadPerDownload + self.offsetContentLength, self.totalContentLength);
         });
     }
 }

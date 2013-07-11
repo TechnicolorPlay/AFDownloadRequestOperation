@@ -37,37 +37,37 @@
  
  If the target is a directory, we use the last part of the URL as a default file name.
  */
-@property (strong) NSString *targetPath;
+@property (atomic, strong) NSString *targetPath;
 
 /**
  A Boolean value that indicates if we should allow a downloaded file to overwrite
  a previously downloaded file of the same name. Default is `NO`.
  */
-@property (assign) BOOL shouldOverwrite;
+@property (atomic, assign) BOOL shouldOverwrite;
 
 /** 
  A Boolean value that indicates if we should try to resume the download. Defaults is `YES`.
 
  Can only be set while creating the request.
  */
-@property (assign, readonly) BOOL shouldResume;
+@property (atomic, readonly) BOOL shouldResume;
 
 /** 
  Deletes the temporary file if operations is cancelled. Defaults to `NO`.
  */
-@property (assign, getter=isDeletingTempFileOnCancel) BOOL deleteTempFileOnCancel;
+@property (atomic, assign, getter=isDeletingTempFileOnCancel) BOOL deleteTempFileOnCancel;
 
 /** 
  Expected total length. This is different than expectedContentLength if the file is resumed.
  
  Note: this can also be zero if the file size is not sent (*)
  */
-@property (assign, readonly) long long totalContentLength;
+@property (atomic, assign, readonly) long long totalContentLength;
 
 /** 
  Indicator for the file offset on partial downloads. This is greater than zero if the file download is resumed.
  */
-@property (assign, readonly) long long offsetContentLength;
+@property (atomic, assign, readonly) long long offsetContentLength;
 
 /**
  The callback dispatch queue on progressive download. If `NULL` (default), the main queue is used.
