@@ -200,6 +200,7 @@ typedef void (^AFURLConnectionProgressiveOperationProgressBlock)(AFDownloadReque
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
+#pragma clang diagnostic ignored "-Wimplicit-retain-self"
     self.completionBlock = ^ {
         NSError *localError = nil;
         if([self isCancelled]) {
